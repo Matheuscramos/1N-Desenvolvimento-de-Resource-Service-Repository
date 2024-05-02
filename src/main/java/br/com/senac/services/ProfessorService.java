@@ -25,9 +25,9 @@ public class ProfessorService implements IService<Professor, Integer> {
 
 	@Override
 	public Professor get(Integer id) {
-		Optional<Professor> alunoEncontrado = professorRepository.findById(id);
-		if (alunoEncontrado.isPresent()) {
-			return alunoEncontrado.get();
+		Optional<Professor> professorEncontrado = professorRepository.findById(id);
+		if (professorEncontrado.isPresent()) {
+			return professorEncontrado.get();
 		} else {
 			return new Professor();
 		}

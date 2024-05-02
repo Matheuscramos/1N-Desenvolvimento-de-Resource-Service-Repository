@@ -55,4 +55,11 @@ public class DisciplinaResource {
 		return disciplinaService.get();
 	}
 
+	public Disciplina update(@PathVariable Integer id, @RequestBody Disciplina disciplina) {
+		return this.disciplinaService.update(id, disciplina);
+	}
+
+	public void delete(@PathVariable Integer id) {
+		this.disciplinaService.delete(id);
+	}
 }

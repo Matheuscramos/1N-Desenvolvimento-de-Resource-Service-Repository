@@ -30,7 +30,7 @@ public class CursoResource {
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Curso cadastrar(@RequestBody Curso entity) {
-		return cursoService.create(entity);
+		return this.cursoService.create(entity);
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class CursoResource {
 	@GetMapping(value = "/{id}", // http://localhost:8080/api/v1/aluno/1
 			produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Curso buscaCursoPorId(@PathVariable("id") Integer id) {
-		return cursoService.get(id);
+		return this.cursoService.get(id);
 	}
 
 	/**
@@ -52,6 +52,14 @@ public class CursoResource {
 	 */
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<Curso> buscarCursos() {
-		return cursoService.get();
+		return this.cursoService.get();
+	}
+
+	public Curso update(@PathVariable Integer id, @RequestBody Curso curso) {
+		return this.cursoService.update(id, curso);
+	}
+
+	public void delete(@PathVariable Integer id) {
+		this.cursoService.delete(id);
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.senac.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -29,7 +30,7 @@ public class Turma {
 	@ManyToOne
 	private Professor professor;
 	@OneToMany
-	private List<Aluno> alunos;
+	private List<Aluno> listaAlunos;
 
 	public Integer getId() {
 		return id;
@@ -79,12 +80,15 @@ public class Turma {
 		this.professor = professor;
 	}
 
-	public List<Aluno> getAlunos() {
-		return alunos;
+	public List<Aluno> getListaAlunos() {
+		if (listaAlunos == null) {
+			listaAlunos = new ArrayList<Aluno>();
+		}
+		return listaAlunos;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void setAlunos(List<Aluno> listaAlunos) {
+		this.listaAlunos = listaAlunos;
 	}
 
 }

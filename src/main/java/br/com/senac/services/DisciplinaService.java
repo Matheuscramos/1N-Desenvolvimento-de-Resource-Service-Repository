@@ -20,14 +20,14 @@ public class DisciplinaService implements IService<Disciplina, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Disciplina create(Disciplina entity) {
-		return disciplinaRepository.save(entity);
+		return this.disciplinaRepository.save(entity);
 	}
 
 	@Override
 	public Disciplina get(Integer id) {
-		Optional<Disciplina> cursoEncontrado = disciplinaRepository.findById(id);
-		if (cursoEncontrado.isPresent()) {
-			return cursoEncontrado.get();
+		Optional<Disciplina> disciplinaEncontrado = disciplinaRepository.findById(id);
+		if (disciplinaEncontrado.isPresent()) {
+			return disciplinaEncontrado.get();
 		} else {
 			return new Disciplina();
 		}
@@ -35,7 +35,7 @@ public class DisciplinaService implements IService<Disciplina, Integer> {
 
 	@Override
 	public List<Disciplina> get() {
-		return disciplinaRepository.findAll();
+		return this.disciplinaRepository.findAll();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class DisciplinaService implements IService<Disciplina, Integer> {
 	public Disciplina update(Integer id, Disciplina entity) {
 		Disciplina disciplinaEncontrado = this.get(id);
 		if (disciplinaEncontrado.getCodigo() != 0 || disciplinaEncontrado.getCodigo() != null) {
-			return disciplinaRepository.save(entity);
+			return this.disciplinaRepository.save(entity);
 		} else {
 			return new Disciplina();
 		}
@@ -52,7 +52,7 @@ public class DisciplinaService implements IService<Disciplina, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Integer id) {
-		disciplinaRepository.deleteById(id);
+		this.disciplinaRepository.deleteById(id);
 	}
 
 }

@@ -23,7 +23,7 @@ public class AlunoService implements IService<Aluno, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Aluno create(Aluno entity) {
-		return alunoRepository.save(entity);
+		return this.alunoRepository.save(entity);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class AlunoService implements IService<Aluno, Integer> {
 
 	@Override
 	public List<Aluno> get() {
-		return alunoRepository.findAll();
+		return this.alunoRepository.findAll();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class AlunoService implements IService<Aluno, Integer> {
 	public Aluno update(Integer id, Aluno entity) {
 		Aluno alunoEncontrado = this.get(id);
 		if (alunoEncontrado.getId() != 0 || alunoEncontrado.getId() != null) {
-			return alunoRepository.save(entity);
+			return this.alunoRepository.save(entity);
 		} else {
 			// return null;
 			return new Aluno();
@@ -56,7 +56,7 @@ public class AlunoService implements IService<Aluno, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Integer id) {
-		alunoRepository.deleteById(id);
+		this.alunoRepository.deleteById(id);
 	}
 
 	public Aluno matriculaCurso(Integer idAluno, Integer idCurso) throws Exception {
@@ -79,4 +79,19 @@ public class AlunoService implements IService<Aluno, Integer> {
 		aluno.getListaCursos().add(curso);
 		return alunoRepository.save(aluno);
 	}
+
+	public void trancar(Aluno aluno) throws Exception {
+		if (aluno.getMatricula() == null) {
+
+			throw new Exception("Maticula não encontrada!");
+
+		}
+		if (!aluno.getMatricula().isEmpty()) {
+			aluno.setSituacao("trancado");
+			System.out.println("Matrícula trancada com sucesso.");
+
+		}
+
+	}
+
 }

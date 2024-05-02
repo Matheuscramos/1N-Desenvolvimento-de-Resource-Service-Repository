@@ -20,7 +20,7 @@ public class CursoService implements IService<Curso, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public Curso create(Curso entity) {
-		return cursoRepository.save(entity);
+		return this.cursoRepository.save(entity);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class CursoService implements IService<Curso, Integer> {
 
 	@Override
 	public List<Curso> get() {
-		return cursoRepository.findAll();
+		return this.cursoRepository.findAll();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class CursoService implements IService<Curso, Integer> {
 	public Curso update(Integer id, Curso entity) {
 		Curso cursoEncontrado = this.get(id);
 		if (cursoEncontrado.getCodigo() != 0 || cursoEncontrado.getCodigo() != null) {
-			return cursoRepository.save(entity);
+			return this.cursoRepository.save(entity);
 		} else {
 			// return null;
 			return new Curso();
@@ -53,7 +53,7 @@ public class CursoService implements IService<Curso, Integer> {
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void delete(Integer id) {
-		cursoRepository.deleteById(id);
+		this.cursoRepository.deleteById(id);
 	}
 
 }

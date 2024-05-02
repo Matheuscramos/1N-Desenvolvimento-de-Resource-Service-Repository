@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.senac.model.Aluno;
-import br.com.senac.services.AlunoService;
+import br.com.senac.model.Turma;
+import br.com.senac.services.TurmaService;
 
 @RestController
-@RequestMapping("api/v1/aluno")
-public class AlunoResource {
+@RequestMapping("api/v1/turma")
+public class TurmaResource {
 
 	@Autowired
-	private AlunoService alunoService;
+	private TurmaService turmaService;
 
 	/**
 	 * Mètodo para cadastrar um aluno
@@ -27,10 +27,11 @@ public class AlunoResource {
 	 * @param entity
 	 * @return
 	 */
+
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public Aluno cadastrar(@RequestBody Aluno entity) {
-		return this.alunoService.create(entity);
+	public Turma cadastrar(@RequestBody Turma entity) {
+		return turmaService.create(entity);
 	}
 
 	/**
@@ -41,9 +42,8 @@ public class AlunoResource {
 	 */
 	@GetMapping(value = "/{id}", // http://localhost:8080/api/v1/aluno/1
 			produces = { MediaType.APPLICATION_JSON_VALUE })
-
-	public Aluno buscaAlunoPorId(@PathVariable("id") Integer id) {
-		return this.alunoService.get(id);
+	public Turma buscaTurmaPorId(@PathVariable("id") Integer id) {
+		return turmaService.get(id);
 	}
 
 	/**
@@ -52,22 +52,8 @@ public class AlunoResource {
 	 * @return
 	 */
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<Aluno> buscarAlunos() {
-		return this.alunoService.get();
-	}
-
-	@PostMapping(value = "matricula-curso/{idAluno}/{idCurso}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Aluno matricularCurso(@PathVariable("idAluno") Integer idAluno, @PathVariable("idCurso") Integer idCurso)
-			throws Exception {
-		return this.alunoService.matriculaCurso(idAluno, idCurso);
-	}
-
-	public Aluno update(@PathVariable Integer id, @RequestBody Aluno aluno) {
-		return this.alunoService.update(id, aluno);
-	}
-
-	public void delete(@PathVariable Integer id) {
-		this.alunoService.delete(id);
+	public List<Turma> buscarTurmas() {
+		return turmaService.get();
 	}
 
 }
